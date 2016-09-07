@@ -62,7 +62,7 @@ $ git clone https://github.com/Hounddog/Album
 
 由于官方示例是根据 ZF2 创建的，此 ZF3 不适用，需要稍作调整，调整点及原因见以下说明：
 
-1. 因ZF3 选中 `PSR-4` 规范，因此目录结构调整，并弃用`zend-loader`：
+#### 因ZF3 选中 `PSR-4` 规范，因此目录结构调整，并弃用`zend-loader`：
 
 ZF2 示例目录结构：
 
@@ -121,7 +121,7 @@ ZF2 示例目录结构：
         \---album
 ```
 
-2. 因 ZF3 `AbstractActionController` 移除了 `getServiceLocator`，推荐创建工厂的方式传入。
+#### 因 ZF3 `AbstractActionController` 移除了 `getServiceLocator`，推荐创建工厂的方式传入。
 
 `config/module.config.php` 调整
 
@@ -134,7 +134,7 @@ ZF2 示例目录结构：
     ),
 ```
 
-3. composer.json 配置增加自动加载
+#### composer.json 配置增加自动加载
 
 ```
     "autoload": {
