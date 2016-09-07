@@ -150,3 +150,9 @@ ZF2 示例目录结构：
         }
     },
 ```
+
+以上配置好后记得执行以下命令以重新生成 composer 自动加载结构
+
+```bash
+$ composer dumpautoload
+```
