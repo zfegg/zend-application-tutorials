@@ -9,5 +9,4 @@ Zend Framework 3 应用搭建Demo和教学
 
 ## Demos
 
-* ZF 官方 Album 
-* Zfegg 示例, 进阶应用
+* [ZF 官方 Album](https://github.com/zfegg/zf-application-tutorials/tree/zf-offical-album)
