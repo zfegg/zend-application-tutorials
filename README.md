@@ -54,7 +54,7 @@ Updating application configuration...
 ## 创建Album 模块
 
 ZF3 创建Album 请求参考官方 https://docs.zendframework.com/tutorials/getting-started/modules 说明，
-如果需要参考写好后的 ZF3 Album 代码,请参考 [src/module](src/module)
+如果需要参考写好后的 ZF3 Album 代码,请参考 [module/Album](module/Album)
 
 ## ZF2 与 ZF3 的 Album 差别
 
