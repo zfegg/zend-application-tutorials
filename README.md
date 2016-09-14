@@ -51,18 +51,21 @@ Updating application configuration...
 
 详细安装说明参考 [官方 skeleton-application 文档](https://docs.zendframework.com/tutorials/getting-started/skeleton-application/) 
 
-## 创建 Album
+## 创建Album 模块
 
-为方便创建，本示例中的 Album 是克隆 [ZF2 Album 教程代码](`https://github.com/Hounddog/Album`)中的  并加以调整
+ZF3 创建Album 请求参考官方 https://docs.zendframework.com/tutorials/getting-started/modules 说明，
+如果需要参考写好后的 ZF3 Album 代码,请参考 [src/module](src/module)
 
-```bash
-$ cd module
-$ git clone https://github.com/Hounddog/Album
-```
+## ZF2 与 ZF3 的 Album 差别
 
-由于官方示例是根据 ZF2 创建的，此 ZF3 不适用，需要稍作调整，调整点及原因见以下说明：
+* [Zf2 Album 教程示例](https://framework.zend.com/manual/2.4/en/user-guide/modules.html)
+* [Zf3 Album 教程示例](https://docs.zendframework.com/tutorials/getting-started/modules/)
 
-#### 因ZF3 选中 `PSR-4` 规范，因此目录结构调整，并弃用`zend-loader`：
+
+如要看原 ZF2的Album 编写代码,可此参考 (https://github.com/Hounddog/Album)
+
+
+#### 因ZF3 选中 `PSR-4` 规范，因此目录结构调整：
 
 ZF2 示例目录结构：
 
@@ -93,7 +96,6 @@ ZF2 示例目录结构：
         \---album
 ```
 
-
 调整后的目录结构：
 
 ```
@@ -121,6 +123,34 @@ ZF2 示例目录结构：
         \---album
 ```
 
+#### `Module.php` 中弃用了 `zend-loader`
+
+`src/Module.php` 参考代码
+
+```php
+class Module
+{
+//选用 Composer 自动加载功能， Zend\Loader 在此不需要
+//    public function getAutoloaderConfig()
+//    {
+//        return array(
+//            'Zend\Loader\ClassMapAutoloader' => array(
+//                __DIR__ . '/autoload_classmap.php',
+//            ),
+//            'Zend\Loader\StandardAutoloader' => array(
+//                'namespaces' => array(
+//                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+//                ),
+//            ),
+//        );
+//    }
+
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+}
+```
 #### 因 ZF3 `AbstractActionController` 移除了 `getServiceLocator`，推荐创建工厂的方式传入。
 
 `config/module.config.php` 调整
