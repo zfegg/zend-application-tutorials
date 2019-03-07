@@ -13,4 +13,10 @@
 
 return [
     // ...
+
+    'input_filters' => array(
+        'abstract_factories' => array(
+            'Zend\InputFilter\InputFilterAbstractServiceFactory'
+        ),
+    ),
 ];

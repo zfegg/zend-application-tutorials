@@ -2,6 +2,7 @@
 namespace Album\Controller;
 
 use Album\Model\AlbumTable;
+use Zend\InputFilter\InputFilterInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Album\Model\Album;
@@ -9,12 +10,19 @@ use Album\Form\AlbumForm;
 
 class AlbumController extends AbstractActionController
 {
-    protected $albumTable;
+    private $table;
+    private $inputFilter;
+
+    public function __construct(AlbumTable $albumTable, InputFilterInterface $inputFilter)
+    {
+        $this->table = $albumTable;
+        $this->inputFilter = $inputFilter;
+    }
 
     public function indexAction()
     {
         return new ViewModel(array(
-            'albums' => $this->getAlbumTable()->fetchAll(),
+            'albums' => $this->table->fetchAll(),
         ));
     }
 
@@ -26,12 +34,12 @@ class AlbumController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $album = new Album();
-            $form->setInputFilter($album->getInputFilter());
+            $form->setInputFilter($this->inputFilter);
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
                 $album->exchangeArray($form->getData());
-                $this->getAlbumTable()->saveAlbum($album);
+                $this->table->saveAlbum($album);
 
                 // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
@@ -48,7 +56,7 @@ class AlbumController extends AbstractActionController
                 'action' => 'add'
             ));
         }
-        $album = $this->getAlbumTable()->getAlbum($id);
+        $album = $this->table->getAlbum($id);
 
         $form  = new AlbumForm();
         $form->bind($album);
@@ -56,11 +64,11 @@ class AlbumController extends AbstractActionController
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter($album->getInputFilter());
+            $form->setInputFilter($this->inputFilter);
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->getAlbumTable()->saveAlbum($form->getData());
+                $this->table->saveAlbum($form->getData());
 
                 // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
@@ -86,7 +94,7 @@ class AlbumController extends AbstractActionController
 
             if ($del == 'Yes') {
                 $id = (int) $request->getPost('id');
-                $this->getAlbumTable()->deleteAlbum($id);
+                $this->table->deleteAlbum($id);
             }
 
             // Redirect to list of albums
@@ -95,26 +103,7 @@ class AlbumController extends AbstractActionController
 
         return array(
             'id'    => $id,
-            'album' => $this->getAlbumTable()->getAlbum($id)
+            'album' => $this->table->getAlbum($id)
         );
-    }
-
-    /**
-     * @return AlbumTable
-     */
-    public function getAlbumTable()
-    {
-        return $this->albumTable;
-    }
-
-    /**
-     *
-     * @param AlbumTable $albumTable
-     * @return $this
-     */
-    public function setAlbumTable(AlbumTable $albumTable)
-    {
-        $this->albumTable = $albumTable;
-        return $this;
     }
 }
