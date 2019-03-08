@@ -45,7 +45,9 @@ class HomePageHandler implements RequestHandlerInterface
             ]);
         }
 
-        $data = [];
+        $data = [
+            'lang' => $request->getAttribute('lang')
+        ];
 
         switch ($this->containerName) {
             case 'Aura\Di\Container':

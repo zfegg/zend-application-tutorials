@@ -34,7 +34,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a href="https://docs.zendframework.com/zend-expressive" target="_blank" class="nav-link">
-                                <i class="fa fa-book"></i> Docs
+                                <i class="fa fa-book"></i> {{ 'Docs' | trans }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -45,6 +45,16 @@
                         <li class="nav-item">
                             <a href="{{ path('api.ping') }}" class="nav-link">
                                 Ping Test
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript: document.cookie='lang=zh-CN; path=/;'; location.reload();" class="nav-link">
+                                中文
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript: document.cookie='lang=en; path=/;'; location.reload();" class="nav-link">
+                                English
                             </a>
                         </li>
                     </ul>

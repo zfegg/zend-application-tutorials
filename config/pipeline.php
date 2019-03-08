@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Middleware\SeedLocaleMiddleware;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\Handler\NotFoundHandler;
@@ -23,7 +24,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // all Exceptions.
     $app->pipe(ErrorHandler::class);
     $app->pipe(ServerUrlMiddleware::class);
-
+    $app->pipe(SeedLocaleMiddleware::class);
     // Pipe more middleware here that you want to execute on every request:
     // - bootstrapping
     // - pre-conditions

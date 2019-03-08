@@ -23,10 +23,7 @@ $aggregator = new ConfigAggregator([
     \Zend\Expressive\ConfigProvider::class,
     \Zend\Expressive\Router\ConfigProvider::class,
 
-    // Swoole config to overwrite some services (if installed)
-    class_exists(\Zend\Expressive\Swoole\ConfigProvider::class)
-        ? \Zend\Expressive\Swoole\ConfigProvider::class
-        : function(){ return[]; },
+    \Zfegg\SymfonyTwigFactory\TranslationConfigProvider::class,
 
     // Default App module config
     App\ConfigProvider::class,

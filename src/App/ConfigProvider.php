@@ -33,6 +33,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Middleware\SeedLocaleMiddleware::class,
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
